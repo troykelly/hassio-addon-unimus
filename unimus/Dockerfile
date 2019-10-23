@@ -10,6 +10,7 @@ RUN apk add --no-cache openjdk10 curl openssl musl socat pwgen
 COPY data/run.sh /
 COPY data/auth_srv.sh /bin/
 COPY data/unimus.properties /etc/unimus/unimus.properties
+COPY data/unimus.default /etc/default/unimus
 
 WORKDIR /
 CMD [ "/run.sh" ]

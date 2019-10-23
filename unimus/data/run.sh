@@ -22,16 +22,61 @@ function write_system_users() {
     ) > "${SYSTEM_USER}"
 }
 
+function call_hassio() {
+    local method=$1
+    local path=$2
+    local data="${3}"
+    local token=
+
+    token="X-Hassio-Key: ${HASSIO_TOKEN}"
+    url="http://hassio/${path}"
+
+    # Call API
+    if [ -n "${data}" ]; then
+        curl -f -s -X "${method}" -d "${data}" -H "${token}" "${url}"
+    else
+        curl -f -s -X "${method}" -H "${token}" "${url}"
+    fi
+
+    return $?
+}
+
+function constrain_host_config() {
+    local user=$1
+    local password=$2
+
+    echo "{"
+    echo "  \"host\": \"$(hostname)\","
+    echo "  \"port\": 1883,"
+    echo "  \"ssl\": false,"
+    echo "  \"protocol\": \"3.1.1\","
+    echo "  \"username\": \"${user}\","
+    echo "  \"password\": \"${password}\""
+    echo "}"
+}
+
+function constrain_discovery() {
+    local user=$1
+    local password=$2
+    local config=
+
+    config="$(constrain_host_config "${user}" "${password}")"
+    echo "{"
+    echo "  \"service\": \"mqtt\","
+    echo "  \"config\": ${config}"
+    echo "}"
+}
+
 ## Main ##
 
 bashio::log.info "Setup Unimus configuration"
-sed -i "s/^(#.*)*(license\.key) *= *(.*)$/\1 = $LICENSE_KEY/g" /etc/unimus/unimus.properties
-sed -i "s/^(#.*)*(database\.encryption\.key) *= *(.*)$/\1 = $DATABASE_ENCRYPTION_KEY/g" /etc/unimus/unimus.properties
-sed -i "s/^(#.*)*(database\.host) *= *(.*)$/\1 = $DATABASE_HOST/g" /etc/unimus/unimus.properties
-sed -i "s/^(#.*)*(database\.port) *= *(.*)$/\1 = $DATABASE_PORT/g" /etc/unimus/unimus.properties
-sed -i "s/^(#.*)*(database\.name) *= *(.*)$/\1 = $DATABASE_NAME/g" /etc/unimus/unimus.properties
-sed -i "s/^(#.*)*(database\.user) *= *(.*)$/\1 = $DATABASE_USER/g" /etc/unimus/unimus.properties
-sed -i "s/^(#.*)*(database\.password) *= *(.*)$/\1 = $DATABASE_PASSWORD/g" /etc/unimus/unimus.properties
+sed -E -i "s/^(#.*)*(license\.key) *= *(.*)$/\2 = $LICENSE_KEY/g" /etc/unimus/unimus.properties
+sed -E -i "s/^(#.*)*(database\.encryption\.key) *= *(.*)$/\2 = $DATABASE_ENCRYPTION_KEY/g" /etc/unimus/unimus.properties
+sed -E -i "s/^(#.*)*(database\.host) *= *(.*)$/\2 = $DATABASE_HOST/g" /etc/unimus/unimus.properties
+sed -E -i "s/^(#.*)*(database\.port) *= *(.*)$/\2 = $DATABASE_PORT/g" /etc/unimus/unimus.properties
+sed -E -i "s/^(#.*)*(database\.name) *= *(.*)$/\2 = $DATABASE_NAME/g" /etc/unimus/unimus.properties
+sed -E -i "s/^(#.*)*(database\.user) *= *(.*)$/\2 = $DATABASE_USER/g" /etc/unimus/unimus.properties
+sed -E -i "s/^(#.*)*(database\.password) *= *(.*)$/\2 = $DATABASE_PASSWORD/g" /etc/unimus/unimus.properties
 
 # Prepare System Accounts
 if [ ! -e "${SYSTEM_USER}" ]; then
