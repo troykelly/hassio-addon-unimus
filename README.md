@@ -1,3 +1,4 @@
+
 # Community Hass.io Add-ons: Unimus
 
 [![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
@@ -32,6 +33,9 @@ To use this add-on, you need to supply the config for Unimus to connect to your 
 - You will need your licence key from the [Unimus Portal][unimus-portal]
 
 You always need to provide the following entries within the configuration:
+
+**Really Important**
+The first time you launch Unimus - you will be taken to the wizard. If you make changes to the settings in the wizard, they will work until your addon restarts and the configuration file is overwritten.
 
 ```json
 {
