@@ -1,6 +1,6 @@
 {
   "name": "Unimus networking equipment configuration management",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "slug": "unimus",
   "description": "Unimus makes network automation, disaster recovery, change management and configuration auditing painless and affordable for a network of any size.",
   "url": "https://github.com/troykelly/hassio-addon-unimus",
@@ -11,15 +11,18 @@
     "amd64",
     "i386"
   ],
-  "startup": true,
+  "startup": "services",
   "boot": "auto",
+  "ingress": true,
+  "ingress_port": 8085,
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8085]",
+  "panel_icon": "mdi:network",
   "ports": {
-    "8085/TCP": 8085
+    "8085/tcp": 8085
   },
   "ports_description": {
-    "8085/TCP": "Web dashboard server"
+    "8085/tcp": "Web interface (Not required for Hass.io Ingress)"
   },
-  "apparmor": true,
   "options": {
     "license": {
       "key": "L-d348ee9a-3525-417b-923d-54cd0008d15"
@@ -33,7 +36,10 @@
       "name": "unimus",
       "user": "unimus",
       "password": "supersecret"
-    }
+    },
+    "ssl": false,
+    "certfile": "fullchain.pem",
+    "keyfile": "privkey.pem"
   },
   "schema": {
     "license": {
@@ -48,11 +54,10 @@
       "name": "str",
       "user": "str",
       "password": "str"
-    }
+    },
+    "ssl": "bool",
+    "certfile": "str",
+    "keyfile": "str"
   },
-  "ingress": true,
-  "ingress_port": 8085,
-  "panel_icon": "mdi:network",
-  "panel_title": "Unimus",
   "image": "troykelly/{arch}-addon-unimus"
 }
