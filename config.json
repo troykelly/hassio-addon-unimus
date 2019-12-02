@@ -1,6 +1,6 @@
 {
   "name": "Unimus",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "slug": "unimus",
   "description": "Unimus is a networking equipment configuration management solution",
   "url": "https://github.com/troykelly/hassio-addon-unimus",
