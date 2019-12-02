@@ -1,6 +1,6 @@
 {
-  "name": "Unimus networking equipment configuration management",
-  "version": "0.0.7",
+  "name": "Unimus",
+  "version": "0.0.8",
   "slug": "unimus",
   "description": "Unimus makes network automation, disaster recovery, change management and configuration auditing painless and affordable for a network of any size.",
   "url": "https://github.com/troykelly/hassio-addon-unimus",
@@ -11,12 +11,16 @@
     "amd64",
     "i386"
   ],
+  "map": [
+    "ssl:ro"
+  ],
   "startup": "services",
   "boot": "auto",
   "ingress": true,
   "ingress_port": 8085,
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8085]",
   "panel_icon": "mdi:network",
+  "panel_title": "Unimus",
   "ports": {
     "8085/tcp": 8085
   },

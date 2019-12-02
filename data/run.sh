@@ -2,7 +2,7 @@
 
 UNIMUS_DIR=/data/unimus
 
-mkdir -p "$UNIMUS_DIR"
+mkdir -p "$UNIMUS_DIR"/ssl
 
 LICENSE_KEY=$(bashio::config 'license.key')
 DATABASE_ENCRYPTION_KEY=$(bashio::config 'encryption.key')
@@ -12,8 +12,16 @@ DATABASE_NAME=$(bashio::config 'database.name')
 DATABASE_USER=$(bashio::config 'database.user')
 DATABASE_PASSWORD=$(bashio::config 'database.password')
 LOGGING=$(bashio::config 'logging')
+SSLCERTFILE=$(bashio::config 'certfile')
+SSLKEYFILE=$(bashio::config 'keyfile')
 
 ## Main ##
+if bashio::config.true 'ssl'; then
+  SSLPASSWORD=$(date | md5)
+  rm -Rf "$UNIMUS_DIR"/ssl/Cert.p12
+  openssl pkcs12 -export -out "$UNIMUS_DIR"/ssl/Cert.p12 -in /ssl/"$SSLCERTFILE" -inkey /ssl/"$SSLKEYFILE" -passout pass:"$SSLPASSWORD"
+  echo "-Dserver.port=8095 -Dserver.ssl.key-store=$UNIMUS_DIR/ssl/Cert.p12 -Dserver.ssl.keyStoreType=PKCS12 -Dserver.ssl.keyAlias=unimus -Dserver.ssl.key-store-password=$SSLPASSWORD" > /etc/default/unimus
+fi
 
 bashio::log.info "Setup Unimus configuration"
 sed -E -i "s/^(#.*)*(license\.key) *= *(.*)$/\2 = $LICENSE_KEY/g" /etc/unimus/unimus.properties
@@ -32,7 +40,7 @@ WAIT_PIDS+=($!)
 function stop_unimus() {
     bashio::log.info "Shutdown Unimus system"
     kill -15 "${WAIT_PIDS[@]}"
-    
+
     wait "${WAIT_PIDS[@]}"
 }
 trap "stop_unimus" SIGTERM SIGHUP
