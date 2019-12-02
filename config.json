@@ -17,15 +17,15 @@
   "startup": "services",
   "boot": "auto",
   "ingress": true,
-  "ingress_port": 8085,
-  "webui": "[PROTO:ssl]://[HOST]:[PORT:8085]",
+  "ingress_port": 8099,
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8099]",
   "panel_icon": "mdi:network",
   "panel_title": "Unimus",
   "ports": {
-    "8085/tcp": 8085
+    "8099/tcp": 8099
   },
   "ports_description": {
-    "8085/tcp": "Web interface (Not required for Hass.io Ingress)"
+    "8099/tcp": "Web interface (Not required for Hass.io Ingress)"
   },
   "options": {
     "license": {

@@ -2,7 +2,7 @@
 
 UNIMUS_DIR=/data/unimus
 
-mkdir -p "$UNIMUS_DIR"/ssl
+mkdir -p "$UNIMUS_DIR"
 
 LICENSE_KEY=$(bashio::config 'license.key')
 DATABASE_ENCRYPTION_KEY=$(bashio::config 'encryption.key')
@@ -17,10 +17,13 @@ SSLKEYFILE=$(bashio::config 'keyfile')
 
 ## Main ##
 if bashio::config.true 'ssl'; then
+  bashio::log.info "Generating SSL p12 for Tomcat"
   SSLPASSWORD=$(date | md5)
-  rm -Rf "$UNIMUS_DIR"/ssl/Cert.p12
-  openssl pkcs12 -export -out "$UNIMUS_DIR"/ssl/Cert.p12 -in /ssl/"$SSLCERTFILE" -inkey /ssl/"$SSLKEYFILE" -passout pass:"$SSLPASSWORD"
-  echo "-Dserver.port=8095 -Dserver.ssl.key-store=$UNIMUS_DIR/ssl/Cert.p12 -Dserver.ssl.keyStoreType=PKCS12 -Dserver.ssl.keyAlias=unimus -Dserver.ssl.key-store-password=$SSLPASSWORD" > /etc/default/unimus
+  rm -Rf /usr/src/app/Cert.p12
+  openssl pkcs12 -export -out /usr/src/app/unimus.keystore.p12 -in /ssl/"$SSLCERTFILE" -inkey /ssl/"$SSLKEYFILE" -name unimus -passout pass:"$SSLPASSWORD"
+  echo "-Dserver.ssl.enabled=true -Dserver.ssl.key-store=/usr/src/app/unimus.keystore.p12 -Dserver.ssl.keyStoreType=PKCS12 -Dserver.ssl.keyAlias=unimus -Dserver.ssl.key-store-password=$SSLPASSWORD -Dserver.port=8099" > /etc/default/unimus
+else
+  echo "-Dserver.port=8099" > /etc/default/unimus
 fi
 
 bashio::log.info "Setup Unimus configuration"
@@ -33,7 +36,8 @@ sed -E -i "s/^(#.*)*(database\.user) *= *(.*)$/\2 = $DATABASE_USER/g" /etc/unimu
 sed -E -i "s/^(#.*)*(database\.password) *= *(.*)$/\2 = $DATABASE_PASSWORD/g" /etc/unimus/unimus.properties
 
 # Start Unimus Server
-java -jar /usr/src/app/Unimus.jar &
+bashio::log.info "Starting Unimus system"
+java $(/bin/cat /etc/default/unimus 2> /dev/null) -jar /usr/src/app/Unimus.jar &
 WAIT_PIDS+=($!)
 
 # Handling Closing
