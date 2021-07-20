@@ -49,4 +49,4 @@ WORKDIR /usr/src/app
 ADD https://unimus.net/download/${UNIMUS_VERSION}/Unimus.jar /usr/src/app/Unimus.jar
 
 WORKDIR /
-CMD [ "/usr/bin/run.sh" ]
+CMD [ "/usr/bin/unimus" ]

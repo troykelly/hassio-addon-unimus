@@ -6,19 +6,15 @@
   "url": "https://github.com/troykelly/hassio-addon-unimus",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "map": ["ssl:ro"],
-  "apparmor": true,
   "startup": "services",
-  "boot": "auto",
-  "ingress": true,
-  "ingress_port": 8099,
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8099]/",
   "panel_icon": "mdi:network",
   "panel_title": "Unimus",
   "ports": {
-    "8099/tcp": 8099
+    "8085/tcp": 8085
   },
   "ports_description": {
-    "8099/tcp": "Web interface (Not required for Hass.io Ingress)"
+    "8085/tcp": "Web interface"
   },
   "tmpfs": true,
   "options": {
