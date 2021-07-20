@@ -6,6 +6,6 @@ This general maintenance release.
 
 - :arrow_up: Got a working verision
 
-[changelog]: <https://github.com/troykelly/hassio-addon-unimus/compare/v0.0.0...v0.0.1>
+[changelog]: https://github.com/troykelly/hassio-addon-unimus/compare/v0.0.0...v0.0.1
 
 Questions? Join our Discord server! <https://discord.me/hassioaddons>
