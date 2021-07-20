@@ -1,8 +1,9 @@
-
 # Community Hass.io Add-ons: Unimus
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield]
+![Project Maintenance][maintenance-shield] ![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield]
+![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
 
 [![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
@@ -21,9 +22,9 @@ The Hass.io Unimus add-on allows you to run a local Unimus server.
 The installation of this add-on is straightforward and easy to do.
 
 1. Navigate in your Home Assistant frontend to **Hass.io** -> **Add-on Store**.
-2. Add a new repository by URL `https://github.com/troykelly/hassio-addons`
-3. Find the "unimus" add-on and click it.
-4. Click on the "INSTALL" button.
+1. Add a new repository by URL `https://github.com/troykelly/hassio-addons`
+1. Find the "unimus" add-on and click it.
+1. Click on the "INSTALL" button.
 
 ## How to use
 
@@ -35,7 +36,10 @@ To use this add-on, you need to supply the config for Unimus to connect to your 
 You always need to provide the following entries within the configuration:
 
 **Really Important**
-The first time you launch Unimus - you will be taken to the wizard. If you make changes to the settings in the wizard, they will work until your addon restarts and the configuration file is overwritten.
+The first time you launch Unimus - you will be taken to the wizard.
+
+If you make changes to the settings in the wizard, they will work until
+your addon restarts and the configuration file is overwritten.
 
 ```json
 {
@@ -69,10 +73,10 @@ The first time you launch Unimus - you will be taken to the wizard. If you make 
 [docs]: https://github.com/troykelly/hassio-addon-unimus/blob/master/README.md
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io/c/hass-io
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2019.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2021.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v2.0.10-blue.svg
-[release]: https://github.com/troykelly/hassio-addon-unimus/tree/v2.0.10
+[release-shield]: https://img.shields.io/badge/version-v2.0.13-blue.svg
+[release]: https://github.com/troykelly/hassio-addon-unimus/tree/v2.0.13
 [screenshot]: https://unimus.net/images/screenshots/3.png
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
