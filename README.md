@@ -73,10 +73,10 @@ your addon restarts and the configuration file is overwritten.
 [docs]: https://github.com/troykelly/hassio-addon-unimus/blob/master/README.md
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io/c/hass-io
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2019.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2021.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v2.0.10-blue.svg
-[release]: https://github.com/troykelly/hassio-addon-unimus/tree/v2.0.10
+[release-shield]: https://img.shields.io/badge/version-v2.0.13-blue.svg
+[release]: https://github.com/troykelly/hassio-addon-unimus/tree/v2.0.13
 [screenshot]: https://unimus.net/images/screenshots/3.png
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
