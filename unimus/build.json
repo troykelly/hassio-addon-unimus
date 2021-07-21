@@ -7,6 +7,6 @@
     "i386": "ghcr.io/hassio-addons/base/i386:edge"
   },
   "args": {
-    "UNIMUS_VERSION": "-%20Latest"
+    "UNIMUS_VERSION": "2.0.0"
   }
 }

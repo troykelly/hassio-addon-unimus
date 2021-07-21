@@ -219,7 +219,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
           token: ${{ secrets.DISPATCH_TOKEN }}
-          repository: troykelly/hassio-addons
+          repository: troykelly/hassio-addons-beta
           event-type: update
           client-payload: >
             {
