@@ -54,6 +54,7 @@
     },
     "ssl": "bool",
     "certfile": "str",
-    "keyfile": "str"
+    "keyfile": "str",
+    "log_level": "list(trace|debug|info|notice|warning|error|fatal)?"
   }
 }
