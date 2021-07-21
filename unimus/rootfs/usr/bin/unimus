@@ -11,11 +11,13 @@ DATABASE_PORT=$(bashio::config 'database.port')
 DATABASE_NAME=$(bashio::config 'database.name')
 DATABASE_USER=$(bashio::config 'database.user')
 DATABASE_PASSWORD=$(bashio::config 'database.password')
-# LOGGING=$(bashio::config 'logging')
+LOG_LEVEL=$(bashio::config 'log_level')
 SSLCERTFILE=$(bashio::config 'certfile')
 SSLKEYFILE=$(bashio::config 'keyfile')
 
-bashio::log.level all
+if bashio::var.has_value "${LOG_LEVEL}"; then
+  bashio::log.level ${LOG_LEVEL}
+fi
 
 bashio::log.info "Checking ${UNIMUS_PORT}/tcp is not currently in use."
 CURRENT_PORT_PROCESS=$(/usr/bin/fuser "${UNIMUS_PORT}/tcp")
