@@ -9,6 +9,7 @@ RUN apk add --no-cache \
     openjdk8=8.282.08-r1 \
     openssl=1.1.1k-r0 \
     outils-md5=0.9-r0 \
+    procps=3.3.17-r0 \
     wget=1.21.1-r1
 
 # Build arguments
