@@ -16,7 +16,7 @@ SSLCERTFILE=$(bashio::config 'certfile')
 SSLKEYFILE=$(bashio::config 'keyfile')
 
 if bashio::var.has_value "${LOG_LEVEL}"; then
-  bashio::log.level ${LOG_LEVEL}
+  bashio::log.level "${LOG_LEVEL}"
 fi
 
 bashio::log.info "Checking ${UNIMUS_PORT}/tcp is not currently in use."
