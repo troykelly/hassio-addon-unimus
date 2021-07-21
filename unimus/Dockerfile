@@ -6,7 +6,7 @@ FROM ${BUILD_FROM}
 RUN apk add --no-cache \
     coreutils=8.32-r2 \
     wget=1.21.1-r1 \
-    openjdk8=8.282.08-r1 \
+    openjdk11=11.0.11_p9-r0 \
     openssl=1.1.1k-r0 \
     outils-md5=0.9-r0
 
