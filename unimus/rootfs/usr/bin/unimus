@@ -16,7 +16,7 @@ SSLKEYFILE=$(bashio::config 'keyfile')
 
 bashio::log.info "Checking ${UNIMUS_PORT}/tcp is not currently in use."
 CURRENT_PORT_PROCESS=$(/usr/bin/fuser "${UNIMUS_PORT}/tcp")
-if [ -n "$CURRENT_PORT_PROCESS" ]; then
+if bashio::var.has_value "${CURRENT_PORT_PROCESS}"; then
   bashio::log.red "Unable to start. Port ${UNIMUS_PORT}/tcp is in use."
   CURRENT_PORT_PROCESS_DATA=$(ps -p 134 -o pid,vsz=MEMORY -o user,group=GROUP -o comm,args=ARGS)
   bashio::log.red "Process: ${CURRENT_PORT_PROCESS_DATA}"
